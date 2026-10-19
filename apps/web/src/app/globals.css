@@ -1,81 +1,132 @@
+
 @import "tailwindcss";
 
-/* Tailwind v4: use the .dark class instead of the operating-system preference. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* HRM DESIGN SYSTEM */
+/* =========================================
+   HRM SYSTEM — CLOUD BLUE & NEUTRAL SLATE
+   Light: White + Blue + Slate
+   Dark: Pure Black + Blue + Slate
+   ========================================= */
+
 :root {
   color-scheme: light;
-  --color-mist-gray: #F3F5F8;
-  --color-white: #FFFFFF;
-  --color-graphite: #353D49;
-  --color-ocean-blue: #2878C8;
-  --color-sky-blue: #A9D3F5;
-  --background: #F3F5F8;
+
+  /* Light mode */
+  --background: #F5F7FC;
   --surface: #FFFFFF;
-  --surface-secondary: #FFFFFF;
-  --sidebar: #353D49;
-  --input-background: #FFFFFF;
-  --foreground: #353D49;
-  --text-secondary: #687586;
-  --text-on-dark: #F2F5F8;
-  --primary: #2878C8;
-  --primary-hover: #2067AE;
-  --primary-soft: #E8F2FC;
-  --selected: #2878C8;
-  --border: #DCE2E9;
-  --focus-ring: #2878C8;
-  --success: #24845D;
-  --warning: #B7791F;
-  --danger: #C44747;
-  --chart-primary: #2878C8;
-  --chart-secondary: #A9D3F5;
-  --radius-card: 14px;
-  --radius-control: 9px;
+  --sidebar: #FFFFFF;
+  --foreground: #35445B;
+  --text-secondary: #718096;
+  --text-on-dark: #35445B;
+
+  /* Primary blue */
+  --primary: #4F8FEA;
+  --primary-hover: #3C7DD8;
+  --primary-soft: #E5EFFD;
+
+  /* Neutral slate */
+  --neutral: #E8EDF3;
+  --neutral-foreground: #526176;
+
+  /* Status colors */
+  --success: #398563;
+  --success-soft: #DDEFE5;
+
+  --warning: #A97724;
+  --warning-soft: #F8EED8;
+
+  --danger: #C45F65;
+  --danger-soft: #F8E3E5;
+
+  /* Borders, charts, inputs */
+  --border: #E3E9F2;
+  --chart-primary: #4F8FEA;
+  --chart-secondary: #8B98AA;
+  --input: #FFFFFF;
+
+  --shadow-card: 0 2px 12px rgba(53, 68, 91, 0.045);
 }
 
-:root.dark,
+/* =========================================
+   DARK MODE — PURE BLACK
+   ========================================= */
+
 .dark {
   color-scheme: dark;
-  --background: #191E26;
-  --surface: #303844;
-  --surface-secondary: #252C36;
-  --sidebar: #252C36;
-  --input-background: #252C36;
-  --foreground: #F2F5F8;
-  --text-secondary: #B8C2CE;
-  --text-on-dark: #F2F5F8;
-  --primary: #2878C8;
-  --primary-hover: #4195E0;
-  --primary-soft: #303844;
-  --selected: #A9D3F5;
-  --border: #46515F;
-  --focus-ring: #A9D3F5;
-  --chart-primary: #A9D3F5;
-  --chart-secondary: #2878C8;
+
+  --background: #000000;
+  --surface: #111318;
+  --sidebar: #000000;
+  --foreground: #F5F7FC;
+  --text-secondary: #A5ADBA;
+  --text-on-dark: #F5F7FC;
+
+  /* Primary blue */
+  --primary: #6AA8FF;
+  --primary-hover: #8AB9FF;
+  --primary-soft: #17263D;
+
+  /* Neutral slate */
+  --neutral: #252B35;
+  --neutral-foreground: #C0C8D4;
+
+  /* Status colors */
+  --success: #8DD9B0;
+  --success-soft: #17352A;
+
+  --warning: #E6C17B;
+  --warning-soft: #3B3020;
+
+  --danger: #F09A9E;
+  --danger-soft: #402428;
+
+  /* Borders, charts, inputs */
+  --border: #292D35;
+  --chart-primary: #6AA8FF;
+  --chart-secondary: #8B98AA;
+  --input: #111318;
+
+  --shadow-card: 0 3px 14px rgba(0, 0, 0, 0.2);
 }
+
+/* =========================================
+   CONNECT CSS VARIABLES TO TAILWIND
+   ========================================= */
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
-  --color-surface-secondary: var(--surface-secondary);
   --color-sidebar: var(--sidebar);
   --color-foreground: var(--foreground);
   --color-text-secondary: var(--text-secondary);
   --color-text-on-dark: var(--text-on-dark);
+
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-primary-soft: var(--primary-soft);
-  --color-selected: var(--selected);
-  --color-border: var(--border);
-  --color-focus-ring: var(--focus-ring);
+
+  --color-neutral: var(--neutral);
+  --color-neutral-foreground: var(--neutral-foreground);
+
   --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+
   --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+
   --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  --color-border: var(--border);
   --color-chart-primary: var(--chart-primary);
   --color-chart-secondary: var(--chart-secondary);
-  --font-sans: Arial, Helvetica, sans-serif;
+  --color-input: var(--input);
 }
+
+/* =========================================
+   BASE
+   ========================================= */
 
 * {
   box-sizing: border-box;
@@ -83,6 +134,7 @@
 
 html {
   min-height: 100%;
+  background: var(--background);
 }
 
 body {
@@ -91,9 +143,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  transition: background-color 180ms ease, color 180ms ease;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
 }
 
 button,
@@ -107,100 +159,179 @@ button {
   cursor: pointer;
 }
 
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.55;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-::selection {
-  background: var(--color-sky-blue);
-  color: var(--color-graphite);
-}
-
-:focus-visible {
-  outline: 3px solid var(--focus-ring);
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
+::selection {
+  background: var(--primary-soft);
+  color: var(--foreground);
+}
+
+/* =========================================
+   CARDS & FORM CONTROLS
+   ========================================= */
+
 .card {
   border: 1px solid var(--border);
-  border-radius: var(--radius-card);
+  border-radius: 16px;
   background: var(--surface);
-  transition: background-color 180ms ease, border-color 180ms ease;
+  box-shadow: var(--shadow-card);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .form-control {
   width: 100%;
-  min-height: 40px;
+  min-height: 42px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-control);
-  background: var(--input-background);
-  color: var(--foreground);
+  border-radius: 10px;
+  background: var(--input);
   padding: 9px 12px;
+  color: var(--foreground);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
 }
 
 .form-control::placeholder {
   color: var(--text-secondary);
+  opacity: 0.8;
 }
 
 .form-control:focus {
-  border-color: var(--focus-ring);
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 1px;
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--primary) 16%, transparent);
 }
+
+.form-control option {
+  background: var(--surface);
+  color: var(--foreground);
+}
+
+/* =========================================
+   BUTTONS
+   ========================================= */
 
 .btn-primary {
   display: inline-flex;
+  min-height: 42px;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 40px;
-  border: 0;
-  border-radius: var(--rasdius-control);
+  border: 1px solid transparent;
+  border-radius: 10px;
   background: var(--primary);
-  color: #FFFFFF;
   padding: 9px 16px;
+  color: #FFFFFF;
   font-weight: 600;
-  transition: background-color 150ms ease;
+  box-shadow: 0 2px 5px rgba(79, 143, 234, 0.12);
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
 }
 
 .btn-primary:hover {
   background: var(--primary-hover);
 }
 
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.dark .btn-primary {
+  color: #000000;
+  box-shadow: none;
+}
+
 .btn-secondary {
   display: inline-flex;
+  min-height: 38px;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  gap: 8px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-control);
+  border-radius: 10px;
   background: var(--surface);
+  padding: 8px 12px;
   color: var(--foreground);
-  padding: 9px 16px;
   font-weight: 500;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
 }
 
 .btn-secondary:hover {
-  background: var(--background);
+  background: var(--primary-soft);
+  border-color: var(--primary);
 }
 
+/* =========================================
+   STATUS LABELS
+   Always display both text and color
+   ========================================= */
+
 .status-success {
+  background: var(--success-soft);
   color: var(--success);
-  background: color-mix(in srgb, var(--success) 10%, var(--surface));
 }
 
 .status-warning {
+  background: var(--warning-soft);
   color: var(--warning);
-  background: color-mix(in srgb, var(--warning) 12%, var(--surface));
 }
 
 .status-danger {
+  background: var(--danger-soft);
   color: var(--danger);
-  background: color-mix(in srgb, var(--danger) 10%, var(--surface));
+}
+
+/* =========================================
+   SCROLLBAR
+   ========================================= */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--border);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* =========================================
+   ACCESSIBILITY: REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
